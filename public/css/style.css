@@ -1,0 +1,44 @@
+.navbar-badge{
+	margin-top: -5px;
+	margin-right: -3px;
+	font-size: .7rem;
+}
+.form-control-sm{
+	border: 1px solid #ced4da;
+	width: 100%;
+}
+.data_image {
+  width: 185px;
+  height: 215px;
+  background-image: url("");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}​
+.form_number {
+	text-align: right;
+}
+.form_number::placeholder {
+	text-align: left;
+}
+.data_table th{
+	text-align: center;
+}
+.data_table .number{
+	text-align: right;
+}
+/*body{
+	font-size: .8rem;
+}
+.nav-sidebar>.nav-item .nav-icon.fa, .nav-sidebar>.nav-item .nav-icon.fab, .nav-sidebar>.nav-item .nav-icon.far, .nav-sidebar>.nav-item .nav-icon.fas, .nav-sidebar>.nav-item .nav-icon.glyphicon, .nav-sidebar>.nav-item .nav-icon.ion{
+	font-size: .9rem;
+}
+.nav-sidebar .nav-link {
+    padding: .3rem 1rem;
+}
+.custom_navbar_right .nav-link{
+	font-size: 1.2rem;
+}
+.navbar-expand .navbar-nav .nav-link{
+	padding-top: .6rem;
+}*/

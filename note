@@ -1,0 +1,127 @@
+To do
+- Username, email, phone unique validasi
+- Backend
+  - DONE User
+  - DONE Setting
+  - DONE Program
+  - DONE Topic
+  - DONE Profile
+  -      Frontend Program + Topic, bikin tampilan grid
+  -      Frontend Assignment
+  -      Coment
+  -      Notif
+  -      Assignment
+- Frontend
+  -      Banner
+  -      Product
+
+
+user
+- id
+- username
+- password
+- temp_password
+- name
+- image
+- email
+- phone
+- type
+- active
+- created_at
+- updated_at
+setting
+- id
+- facebook
+- instagram
+- youtube
+- whatsapp
+- email
+- created_at
+- updated_at
+program
+- id
+- name
+- files
+- description
+- active
+- created_at
+- updated_at
+topic
+- id
+- program_id
+- name
+- files
+- description
+- active
+- created_at
+- updated_at
+attachment
+- id
+- files
+- created_at
+- updated_at
+comment
+- id
+- user_id
+- attachment_id
+- comment
+- read_status
+- created_at
+- updated_at
+assignment
+- id
+- user_id
+- topic_id
+- attachment_id
+- grade
+- created_at
+- updated_at
+assignment_revision
+- id
+- assignment_id
+- attachment_id
+- created_at
+- updated_at
+
+<iframe src="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf" width="100%" height="500px">
+<embed src="file_name.pdf" width="800px" height="2100px" />
+
+composer require "almasaeed2010/adminlte"
+ln -s C:/laragon/www/fl/kpmk_lite/vendor/almasaeed2010 C:/laragon/www/fl/kpmk_lite/public/vendor/almasaeed2010
+cd vendor
+bower install bootstrap-toggle
+ln -s C:/laragon/www/fl/kpmk_lite/vendor/bower_components C:/laragon/www/fl/kpmk_lite/public/vendor/bower_components
+
+Pendahuluan
+- untuk instalasi, pada terminal ketik
+  composer create-project --prefer-dist laravel/laravel nama_folder_project
+- letak model(--migration -> sudah automatis migration)
+  nama_folder_project/app
+  php artisan make:model Store --migration
+- letak controller
+  nama_folder_project/Http/Controllers
+  php artisan make:controller StoreController
+- letak view
+  nama_folder_project/resources/views
+- letak css & js
+  nama_folder_project/public
+
+Config
+- db
+  nama_folder_project/.env
+- route
+  nama_folder_project/routes/web.php
+
+Migration & Seeder
+- Migration
+  php artisan make:migration CreateStoreTable
+  php artisan migrate
+- Seeder
+  php artisan make:seeder UserSeeder
+  php artisan db:seed --class=UserSeeder
+
+php artisan make:model User
+php artisan make:controller UserController
+
+php artisan make:migration CreateUserTable
+php artisan migrate
