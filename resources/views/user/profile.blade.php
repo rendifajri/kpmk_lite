@@ -52,15 +52,10 @@ function cekform(mode){
 <div class="row">
   <div class="col-md-3">
     <!-- Profile Image -->
-    <div class="card card-primary card-outline">
+    <div class="card">
       <div class="card-body box-profile">
         <div class="text-center">
-          @if($user->image != null)
-            <img class="profile-user-img img-fluid img-circle" src="{{ asset('/') }}images/user/{{$user->image}}" alt="User profile picture">
-          @endif
-          @if($user->image == null)
-            <img class="profile-user-img img-fluid img-circle" src="{{ asset('/') }}images/user/no_image.jpg" alt="User profile picture">
-          @endif
+          <div class="profile-user-img img-fluid img-circle" style="background: url('{{ asset('/') }}images/user/{{$user->image}}')center center/cover;height: 100px;width: 100px"></div>
         </div>
         <h3 class="profile-username text-center">{{$user->name}}</h3>
         <p class="text-muted text-center">{{$user->type}}</p>
@@ -85,7 +80,7 @@ function cekform(mode){
       <div class="card-header p-2">
         <ul class="nav nav-pills">
           <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-          <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+          <li class="nav-item"><a class="nav-link" href="#assignment" data-toggle="tab">Assignment</a></li>
         </ul>
       </div>
       <div class="card-body">
@@ -151,7 +146,7 @@ function cekform(mode){
               </form>
             </div>
           </div>
-          <div class="active tab-pane" id="timeline">
+          <div class="active tab-pane" id="assignment">
             <div class="col-12">
               <!-- kosong -->
             </div>

@@ -57,8 +57,6 @@ function show_modal(mode, data_arr) {
     var var_dis = false;
     if(mode == 'edit'){
       var_dis = false;
-      $('#edit_image').show();
-      $('#edit_image_img').hide();
       $('#edit_files').show();
       $('#div_edit_files').hide();
       $('#edit_description').summernote('enable');
@@ -67,10 +65,6 @@ function show_modal(mode, data_arr) {
     }
     else{
       var_dis = true;
-      $('#edit_image').hide();
-      $('#edit_image_img').show();
-      //$('#edit_image_img').prop('src', '{{ asset('/') }}images/topic/'+data_arr['image']);
-      $('#edit_image_img').css('background-image', 'url({{ asset('/') }}images/topic/'+data_arr['image']+')');
       $('#edit_files').hide();
       $('#div_edit_files').show();
       $('#edit_description').summernote('disable');
@@ -136,7 +130,6 @@ function show_modal(mode, data_arr) {
               echo "id : '".$row->id."',
               program_id : '".$row->program_id."',
               name : '".$row->name."',
-              image : '".$row->image."',
               files : '".$row->files."',
               description : '".trim(rawurlencode($row->description), '"')."',
               active : '".$row->active."'";
@@ -145,7 +138,6 @@ function show_modal(mode, data_arr) {
               echo "id : '".$row->id."',
               program_id : '".$row->program_id."',
               name : '".$row->name."',
-              image : '".$row->image."',
               files : '".$row->files."',
               description : '".trim(rawurlencode($row->description), '"')."',
               active : '".$row->active."'";
@@ -186,12 +178,6 @@ function show_modal(mode, data_arr) {
             <label class="col-sm-4 col-form-label">Name</label>
             <div class="col-sm-8">
               <input type="text" class="form-control" name="name" id="add_name" placeholder="Name">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Image</label>
-            <div class="col-sm-8">
-              <input type="file" class="form-control-file" accept="image/*" name="image" id="add_image">
             </div>
           </div>
           <div class="form-group row">
@@ -250,14 +236,6 @@ function show_modal(mode, data_arr) {
             <label class="col-sm-4 col-form-label">Name</label>
             <div class="col-sm-8">
               <input type="text" class="form-control" name="name" id="edit_name" placeholder="Name">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Image</label>
-            <div class="col-sm-8">
-              <input type="file" class="form-control-file" accept="image/*" name="image" id="edit_image">
-              <div class="data_image" style="display:none" id="edit_image_img"></div>
-              <!--<img style="width: 185px;height: 215px" src="" style="display:none" id="edit_image_img" />-->
             </div>
           </div>
           <div class="form-group row">

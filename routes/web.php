@@ -20,7 +20,7 @@ Route::get ('backend/dashboard', 'DashboardController@index');
 Route::get ('user/login', 'UserController@login');
 Route::post('user/login/post', 'UserController@login_post');
 Route::get ('user/logout', 'UserController@logout');
-Route::get ('user', 'UserController@profile');
+Route::get ('user', 'UserController@f_index');
 Route::get ('user/profile/{id}', 'UserController@profile');
 Route::post('user/profile/post', 'UserController@profile_post');
 Route::get ('backend', 'UserController@index');
@@ -32,6 +32,9 @@ Route::get ('backend/user/reset_password/{id}', 'UserController@reset_password')
 
 Route::get ('program', 'ProgramController@f_index');
 Route::get ('program/detail/{id}', 'ProgramController@f_detail');
+Route::get ('program/detail/assignment/{topic_id}/{user_id}', 'ProgramController@assignment');
+Route::post('assignment/add/post', 'AssignmentController@add_post');
+Route::post('assignment/comment/add/post', 'AssignmentController@comment_add_post');
 Route::get ('backend/program', 'ProgramController@index');
 Route::post('backend/program/add/post', 'ProgramController@add_post');
 Route::put ('backend/program/edit/post', 'ProgramController@edit_post');

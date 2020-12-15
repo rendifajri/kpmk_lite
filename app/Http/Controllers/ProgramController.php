@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use App\Program;
+use App\Topic;
+use App\Assignment;
 
 class ProgramController extends Controller
 {
@@ -20,7 +22,7 @@ class ProgramController extends Controller
         $data['program'] = Program::orderBy('name')->get();
         return view('program/f_index', $data);
     }
-    public function f_detail(Request $request){
+    public function f_detail(Request $request, $id){
         if($request->session()->get('type') != 'User'){
             return redirect('user/login');
         }
@@ -28,8 +30,22 @@ class ProgramController extends Controller
         $data['title'] = 'Program';
         $data['sub_title'] = 'Detail';
 
-        $data['program'] = Program::orderBy('name')->get();
-        return view('program/f_index', $data);
+        $data['program'] = Program::find($id);
+        return view('program/f_detail', $data);
+    }
+    public function assignment(Request $request, $topic_id, $user_id){
+        if(!$request->session()->has('id')){
+            return redirect('user/login');
+        }
+        $data['request'] = $request;
+        $data['title'] = 'Program';
+        $data['sub_title'] = 'Detail';
+        $data['sub_sub_title'] = 'Assignment';
+
+        $data['user_id'] = $user_id;
+        $data['topic'] = Topic::find($topic_id);
+        $data['assignment'] = $data['topic']->assignment()->where(['user_id' => $user_id])->get();
+        return view('program/assignment', $data);
     }
     public function index(Request $request){
         if($request->session()->get('type') != 'Administrator'){

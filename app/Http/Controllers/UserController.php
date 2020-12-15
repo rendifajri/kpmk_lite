@@ -33,6 +33,8 @@ class UserController extends Controller
         $check = User::select('id', 'username', 'name', 'image', 'email', 'phone', 'type')->where($where);
         if($check->count() > 0){
 	        $user = $check->first()->toArray();
+            if($user['image'] == null)
+                $user['image'] = 'no_image.jpg';
 			$request->session()->put($user);
             if($user['type'] == 'Administrator')
                return redirect('backend/dashboard');
@@ -90,6 +92,16 @@ class UserController extends Controller
         $user = User::select('id', 'username', 'name', 'image', 'email', 'phone', 'type')->find($request->id)->toArray();
         $request->session()->put($user);
         return redirect('user/profile/'.$request->id);
+    }
+    public function f_index(Request $request){
+        if($request->session()->get('type') != 'User'){
+            return redirect('user/login');
+        }
+        $data['request'] = $request;
+        $data['title'] = 'User';
+
+        $data['user'] = User::orderBy('name')->where(['type' => 'User'])->get();
+        return view('user/f_index', $data);
     }
     public function index(Request $request){
         if($request->session()->get('type') != 'Administrator'){

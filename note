@@ -1,87 +1,19 @@
 To do
 - Username, email, phone unique validasi
-- Backend
-  - DONE User
-  - DONE Setting
-  - DONE Program
-  - DONE Topic
-  - DONE Profile
-  -      Frontend Program + Topic, bikin tampilan grid
-  -      Frontend Assignment
-  -      Coment
-  -      Notif
-  -      Assignment
-- Frontend
-  -      Banner
-  -      Product
-
-
-user
-- id
-- username
-- password
-- temp_password
-- name
-- image
-- email
-- phone
-- type
-- active
-- created_at
-- updated_at
-setting
-- id
-- facebook
-- instagram
-- youtube
-- whatsapp
-- email
-- created_at
-- updated_at
-program
-- id
-- name
-- files
-- description
-- active
-- created_at
-- updated_at
-topic
-- id
-- program_id
-- name
-- files
-- description
-- active
-- created_at
-- updated_at
-attachment
-- id
-- files
-- created_at
-- updated_at
-comment
-- id
-- user_id
-- attachment_id
-- comment
-- read_status
-- created_at
-- updated_at
-assignment
-- id
-- user_id
-- topic_id
-- attachment_id
-- grade
-- created_at
-- updated_at
-assignment_revision
-- id
-- assignment_id
-- attachment_id
-- created_at
-- updated_at
+- User profile old password
+- DONE User
+- DONE Setting
+- DONE Program
+- DONE Topic
+- DONE Profile
+- DONE Frontend Program + Topic, bikin tampilan grid
+- DONE Frontend Assignment
+- DONE Coment
+- DONE Frontend User
+-      Assignment -> Topic yang udah pny assignment, per user
+-      Lock
+-      Profile timeline -> Topic yang udah pny assignment
+-      Notif
 
 <iframe src="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf" width="100%" height="500px">
 <embed src="file_name.pdf" width="800px" height="2100px" />

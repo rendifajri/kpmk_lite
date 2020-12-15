@@ -82,12 +82,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          @if(Session::get('image') != null)
-            <img src="{{ asset('/') }}images/user/{{Session::get('image')}}" class="img-circle elevation-2" alt="User Image">
-          @endif
-          @if(Session::get('image') == null)
-            <img src="{{ asset('/') }}images/user/no_image.jpg" class="img-circle elevation-2" alt="User Image">
-          @endif
+          <div style="background: url('{{ asset('/') }}images/user/{{Session::get('image')}}')center center/cover;height: 35px;width: 35px" class="img-circle elevation-2"></div>
         </div>
         <div class="info">
           <a href="{{ url('/') }}/user/profile/{{Session::get('id')}}" class="d-block">{{Session::get('name')}}</a>
@@ -145,8 +140,7 @@
               <p>Setting</p>
             </a>
           </li>
-          @endif
-          @if(Session::get('type') == 'User')
+          @elseif(Session::get('type') == 'User')
           <li class="nav-item">
             <a href="{{ url('/') }}/dashboard" class="nav-link {{ $title == 'Dashboard' ? 'active':'' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -160,10 +154,11 @@
               <p>Program</p>
             </a>
           </li>
+          <li class="nav-header">USER</li>
           <li class="nav-item">
-            <a href="{{ url('/') }}/assignment" class="nav-link {{ $title == 'Assignment' ? 'active':'' }}">
-              <i class="nav-icon fas fa-paper-plane"></i>
-              <p>Assignment</p>
+            <a href="{{ url('/') }}/user" class="nav-link {{ $title == 'User' ? 'active':'' }}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>User</p>
             </a>
           </li>
           @endif
@@ -186,12 +181,15 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              @if ($__env->yieldContent('sub_title') == null)
+              @if($__env->yieldContent('sub_title') == null)
                 <li class="breadcrumb-item active">@yield('title')</li>
-              @endif
-              @if ($__env->yieldContent('sub_title') != null)
+              @elseif($__env->yieldContent('sub_sub_title') == null )
                 <li class="breadcrumb-item"><a href="#">@yield('title')</a></li>
                 <li class="breadcrumb-item active">@yield('sub_title')</li>
+              @elseif ($__env->yieldContent('sub_sub_title') != null)
+                <li class="breadcrumb-item"><a href="#">@yield('title')</a></li>
+                <li class="breadcrumb-item"><a href="#">@yield('sub_title')</a></li>
+                <li class="breadcrumb-item active">@yield('sub_sub_title')</li>
               @endif
             </ol>
           </div><!-- /.col -->

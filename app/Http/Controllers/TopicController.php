@@ -35,14 +35,6 @@ class TopicController extends Controller
                     'active' => $active
                 ];
         $id = Topic::create($data)->id;
-        $folder = "images/topic";
-        $image = $request->file('image');
-        $image_name = $id.".".$image->getClientOriginalExtension();
-        $image->move($folder, $image_name);
-        unset($data);
-        $data = [
-                    'image' => $image_name
-               ];
         $folder = "files/topic";
         $files = $request->file('data_files');
         $files_name = [];
@@ -53,6 +45,7 @@ class TopicController extends Controller
                 $files_name[$i] = $file->getClientOriginalName();
                 $i++;
             }
+            unset($data);
             $data['files'] = implode(',', $files_name);
             Topic::find($id)->update($data);
         }
@@ -69,13 +62,6 @@ class TopicController extends Controller
                     'description' => $request->description,
                     'active' => $active
                 ];
-        $folder = "images/topic";
-        $image = $request->file('image');
-        if($image != null){
-            $image_name = $request->id.".".$image->getClientOriginalExtension();
-            $image->move($folder, $image_name);
-            $data['image'] = $image_name;
-        }
         $folder = "files/topic";
         $files = $request->file('data_files');
         $files_name = [];
