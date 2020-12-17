@@ -92,7 +92,7 @@ function cekform(mode){
               <strong>{{ Session::get('message') }}</strong>
             </div>
             @endif
-            <div class="col-6">
+            <div class="col-lg-6 col-md-8 col-sm-10 col-12">
               <form class="form-horizontal" name="add_frm" id="add_frm" method="post" enctype="multipart/form-data" name="frm" action="{{ url('/') }}/user/profile/post">
               <input type="hidden" name="id" id="add_id" value="{{ $user->id }}">
               {{ csrf_field() }}
