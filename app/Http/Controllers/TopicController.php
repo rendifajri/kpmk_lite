@@ -43,8 +43,8 @@ class TopicController extends Controller
             foreach ($files as $file) {
                 //$files_name[$i] = $request->id."_".$i.".".$file->getClientOriginalExtension();
                 $files_name[$i] = $file->getClientOriginalName();
-                $i++;
                 $file->move($folder, $files_name[$i]);
+                $i++;
             }
             unset($data);
             $data['files'] = implode(',', $files_name);
