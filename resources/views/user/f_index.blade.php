@@ -17,7 +17,7 @@
 @section('content')
 <div class="row">
   @foreach($user as $row)
-  <div class="col-3">
+  <div class="col-md-3 col-sm-4 col-6">
     <a href="{{ url('/') }}/user/profile/{{ $row->id }}" class="card" style="height:180px">
       <div class="card-body box-profile bg-info">
         <div class="text-center">
