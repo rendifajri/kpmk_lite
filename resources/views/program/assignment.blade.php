@@ -141,8 +141,8 @@ function show_preview(folder, file, width){
           <div class="timeline-body">
             <div class="form-horizontal px-3">
               <div class="form-group row">
-                <label class="col-md-1 col-sm-2 col-2 col-form-label">Files</label>
-                <div class="col-md-11 col-sm-10 col-10 pt-2">
+                <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Files</label>
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9 pt-2">
                   @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
                   <?php
                   $files = explode(',', $row->files);
@@ -167,11 +167,11 @@ function show_preview(folder, file, width){
               $row_comment->user->image = $row_comment->user->image == null ? 'no_image.jpg' : $row_comment->user->image;
               ?>
               <div class="form-group row">
-                <div class="col-md-1 col-sm-2 col-2">
+                <div class="col-lg-1 col-md-2 col-sm-2 col-3">
                   <div class="profile-user-img img-fluid img-circle" style="background: url('{{ asset('/') }}images/user/{{$row_comment->user->image}}')center center/cover;padding-bottom: 90%;height: 0px;width: 100%"><img src="{{ asset('/') }}images/user/{{$row_comment->user->image}}" style="width: 100%;opacity: 0"></div>
                 </div>
-                <div class="col-md-11 col-sm-10 col-10 text-sm">
-                  <p><b>{{$row_comment->user->name}}</b><span class="text-secondary float-right"><i class="fas fa-clock"></i> {{date('j M Y H:i:s', strtotime($row_comment->created_at))}}</span></p>
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9 text-sm">
+                  <p><span class="text-secondary text-xs float-right"><i class="fas fa-clock"></i> {{date('j M Y H:i:s', strtotime($row_comment->created_at))}}</span><b>{{$row_comment->user->name}}</b></p>
                   <?=$row_comment->comment?>
                   <hr>
                 </div>
@@ -179,12 +179,12 @@ function show_preview(folder, file, width){
               @endforeach
               @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id'))
               <div class="form-group row">
-                <div class="col-md-1 col-sm-2 col-2">
+                <div class="col-lg-1 col-md-2 col-sm-2 col-3">
                   <div class="profile-user-img img-fluid img-circle" style="background: url('{{ asset('/') }}images/user/{{Session::get('image')}}')center center/cover;padding-bottom: 90%;height: 0px;width: 100%">
                     <img src="{{ asset('/') }}images/user/{{Session::get('image')}}" style="width: 100%;opacity: 0">
                   </div>
                 </div>
-                <div class="col-md-11 col-sm-10 col-10">
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9">
                   <textarea class="textarea" placeholder="Comment" name="comment" id="add_<?=$id_link?>_comment"></textarea>
                 </div>
               </div>
@@ -229,14 +229,14 @@ function show_preview(folder, file, width){
           <div class="timeline-body">
             <div class="form-horizontal px-3">
               <div class="form-group row">
-                <label class="col-md-1 col-sm-2 col-2 col-form-label">Files</label>
-                <div class="col-md-11 col-sm-10 col-10">
+                <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Files</label>
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9">
                   <input type="file" class="form-control-file" name="data_files[]" id="add_files" multiple>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-1 col-sm-2 col-2 col-form-label">Comment</label>
-                <div class="col-md-11 col-sm-10 col-10">
+                <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Comment</label>
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9">
                     <textarea class="textarea" placeholder="Comment" name="comment" id="add_comment"></textarea>
                 </div>
               </div>

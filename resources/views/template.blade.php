@@ -61,7 +61,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item">
         <a href="{{ url('/') }}/user/logout" class="nav-link">Logout</a>
       </li>
     </ul>
