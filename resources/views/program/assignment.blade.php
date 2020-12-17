@@ -338,7 +338,7 @@ function show_preview(folder, file, width){
   });
   $('.textarea').summernote({
                               toolbar: [
-                                ['font', ['bold', 'italic', 'underline']
+                                ['font', ['bold', 'italic', 'underline']]
                               ]
                             });
 
