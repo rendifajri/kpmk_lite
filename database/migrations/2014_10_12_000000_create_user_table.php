@@ -13,6 +13,7 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
+        Schema::defaultStringLength(191);
         Schema::create('user', function (Blueprint $table) {
             $table->id();
             $table->string('username')->nullable()->unique();
@@ -28,7 +29,7 @@ class CreateUserTable extends Migration
         });
         $data[] = [
                     'username' => 'admin',
-                    'password' => md5('123456'),
+                    'password' => md5('123'),
                     'temp_password' => null,
                     'name' => 'Administrator',
                     'email' => 'admin@admin.com',

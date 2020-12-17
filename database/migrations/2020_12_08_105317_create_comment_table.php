@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssignmentTable extends Migration
+class CreateCommentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateAssignmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignment', function (Blueprint $table) {
+        Schema::create('comment', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('topic_id')->unsigned();
-            $table->text('files')->nullable();
-            $table->boolean('locked');
-            $table->integer('grade')->nullable();
+            $table->bigInteger('assignment_id')->unsigned();
+            $table->text('comment');
+            $table->boolean('read_status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user')->onUpdate('cascade');
-            $table->foreign('topic_id')->references('id')->on('topic')->onUpdate('cascade');
+            $table->foreign('assignment_id')->references('id')->on('assignment')->onUpdate('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateAssignmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assignment');
+        Schema::dropIfExists('comment');
     }
 }
