@@ -41,7 +41,7 @@ function show_preview(folder, file, width){
           <h4><b>{{$program->name}}</b></h4>
           <p>
             @if($program->image != null)
-              <div class="float-left mr-3 rounded" style="background: url('{{ asset('/') }}images/program/{{$program->image}}')center center/cover;width: 300px;height: 200px;border: 3px solid #AAA"></div>
+              <div class="float-left mr-3 rounded" style="background: url('{{ asset('/') }}images/program/{{$program->image}}')center center/cover;width: 50%;padding-bottom: 20%;border: 3px solid #AAA"></div>
             @endif
             <?=$program->description?>
             Files :
