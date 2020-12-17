@@ -291,7 +291,7 @@ function show_modal(mode, data_arr) {
   });
   $('.textarea').summernote({
                               toolbar: [
-                                ['font', ['bold', 'underline']]
+                                ['font', ['bold', 'italic', 'underline']]
                               ]
                             });
 
