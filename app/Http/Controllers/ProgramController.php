@@ -44,7 +44,6 @@ class ProgramController extends Controller
 
         $data['user_id'] = $user_id;
         $data['topic'] = Topic::find($topic_id);
-        $data['assignment'] = $data['topic']->assignment()->where(['user_id' => $user_id])->get();
         return view('program/assignment', $data);
     }
     public function index(Request $request){
@@ -85,6 +84,7 @@ class ProgramController extends Controller
             foreach ($files as $file) {
                 //$files_name[$i] = $request->id."_".$i.".".$file->getClientOriginalExtension();
                 $files_name[$i] = $file->getClientOriginalName();
+                $file->move($folder, $files_name[$i]);
                 $i++;
             }
             $data['files'] = implode(',', $files_name);

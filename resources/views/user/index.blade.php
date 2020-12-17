@@ -154,16 +154,7 @@ function show_modal(mode, data_arr) {
               <td>{{ $active }}</td>
               <td class="text-right">
                 <a href="{{ url('/') }}/backend/user/reset_password/{{ $row->id }}" target="_blank" class="btn bg-green btn-circle btn-xs" title="Reset Password" onclick="return confirm('Are you sure want to RESET {{ $row->name }} password?')"><i class="fa fa-lock"></i></a>
-                <button onclick="show_modal('view', {<?php
-              echo "id : '".$row->id."',
-              type : '".$row->type."',
-              username : '".$row->username."',
-              name : '".$row->name."',
-              image : '".$row->image."',
-              email : '".$row->email."',
-              phone : '".$row->phone."',
-              active : '".$row->active."'";
-              ?>})" class="btn bg-blue btn-circle btn-xs" title="View Data"><i class="fa fa-list"></i></button>
+                <a href="{{ url('/') }}/user/profile/{{ $row->id }}"  class="btn bg-blue btn-circle btn-xs" title="View Profile"><i class="fa fa-list"></i></a>
                 <button onclick="show_modal('edit', {<?php
               echo "id : '".$row->id."',
               type : '".$row->type."',

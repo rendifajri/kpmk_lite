@@ -57,19 +57,40 @@ function cekuserform(mode, div_id){
     $('#'+mode+'_'+div_id+'_frm').submit();
   }
 }
+function show_preview(folder, file, width){
+  $('#preview_modal_name').html(file);
+  $('#preview_modal_iframe').attr("src", '{{ asset('/') }}files/'+folder+'/'+file);
+  $('#preview_modal_iframe').attr("width", width);
+  $('#preview_modal').modal({ show: false });
+  $('#preview_modal').modal('show');
+}
 </script>
 <div class="col-12">
   <div class="card">
     <!--<h5 class="card-title p-3" style="padding-bottom: 0px!important;">{{$topic->name}}</h5>-->
     <div class="card-body">
       <div class="row">
-        <div class="col-12" style="line-height: 0.5;">
+        <div class="col-12" style="line-height: 1;">
           <h4><b>{{$topic->program()->first()->name}} - {{$topic->name}}</b></h4>
           <p>
             <!--if($topic->image != null)
               <div class="float-left mr-3 rounded" style="background: url('{{ asset('/') }}images/program/{{$topic->image}}')center center/cover;width: 300px;height: 200px;border: 3px solid #AAA"></div>
             endif-->
             <?=$topic->description?>
+            Files :
+            <?php
+            $files = explode(',', $topic->files);
+            natcasesort($files);
+            foreach($files as $file){
+              $ext = pathinfo($file)['extension'];
+              if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+                echo ' <a href="javascript:show_preview(\'topic\', \''.$file.'\', null)">'.$file.'</a>';
+              else if($ext == 'pdf')
+                echo ' <a href="javascript:show_preview(\'topic\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+              else
+                echo ' <a href="'.asset('/').'files/topic/'.$file.'".>'.$file.'</a>';
+            }
+            ?>
           </p>
         </div>
       </div>
@@ -86,7 +107,7 @@ function cekuserform(mode, div_id){
     $i = 0;
     $id_link = $i == 0 ? 'inisial' : 'r'.$i;
     ?>
-    @foreach($assignment as $row)
+    @foreach($topic->assignment()->where(['user_id' => $user_id])->get() as $row)
       <!--<div class="time-label">
         <span class="bg-red">10 Feb. 2014</span>
       </div>-->
@@ -103,18 +124,39 @@ function cekuserform(mode, div_id){
           <input type="hidden" name="div_id" id="add_div_id" value="{{$id_link}}">
           <input type="hidden" name="assignment_id" id="add_assignment_id" value="{{$row->id}}">
           <span class="time"><i class="fas fa-clock"></i> {{date('j M Y H:i:s', strtotime($row->created_at))}}</span>
-          @if($i == 0)
-          <h3 class="timeline-header"><a href="#{{$id_link}}">Inisial Assignment</a></h3>
-          @else
-          <h3 class="timeline-header"><a href="#{{$id_link}}">Revisi {{$i}}</a></h3>
-          @endif
+          <h3 class="timeline-header">
+            @if($i == 0)
+            <a href="#{{$id_link}}">Inisial Assignment</a>
+            @else
+            <a href="#{{$id_link}}">Revisi {{$i}}</a>
+            @endif
+            @if($request->session()->get('type') == 'Administrator')
+              @if($row->locked == 1)
+                <a href="{{ url('/') }}/backend/assignment/lock/{{$row->id}}/0/{{$id_link}}" title="Locked. Click to unlock"><i class="fa fa-unlock bg-primary p-1 rounded-circle" style="font-size: 12px"></i></a>
+              @else
+                <a href="{{ url('/') }}/backend/assignment/lock/{{$row->id}}/1/{{$id_link}}" title="Unlocked. Click to lock"><i class="fa fa-lock bg-primary p-1 rounded-circle" style="font-size: 12px"></i></a>
+              @endif
+            @endif
+          </h3>
           <div class="timeline-body">
             <div class="form-horizontal px-3">
               <div class="form-group row">
                 <label class="col-sm-1 col-form-label">Files</label>
                 <div class="col-sm-11 pt-2">
                   @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
-                  {{$row->files}}
+                  <?php
+                  $files = explode(',', $row->files);
+                  natcasesort($files);
+                  foreach($files as $file){
+                    $ext = pathinfo($file)['extension'];
+                    if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+                      echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', null)">'.$file.'</a>';
+                    else if($ext == 'pdf')
+                      echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+                    else
+                      echo ' <a href="'.asset('/').'files/assignment/'.$file.'".>'.$file.'</a>';
+                  }
+                  ?>
                   @else
                   Hidden
                   @endif
@@ -177,11 +219,13 @@ function cekuserform(mode, div_id){
           <input type="hidden" name="user_id" id="add_user_id" value="{{$request->session()->get('id')}}">
           <input type="hidden" name="div_id" id="add_div_id" value="{{$id_link}}">
           <span class="time"><!--<i class="fas fa-clock"></i> 12:05--></span>
+          <h3 class="timeline-header">
           @if($i == 0)
-          <h3 class="timeline-header"><a href="#{{$id_link}}">Inisial Assignment</a></h3>
-          @else
-          <h3 class="timeline-header"><a href="#{{$id_link}}">Revisi {{$i}}</a></h3>
-          @endif
+            <a href="#{{$id_link}}">Inisial Assignment</a>
+            @else
+            <a href="#{{$id_link}}">Revisi {{$i}}</a>
+            @endif
+          </h3>
           <div class="timeline-body">
             <div class="form-horizontal px-3">
               <div class="form-group row">
@@ -242,6 +286,26 @@ function cekuserform(mode, div_id){
         </div>
       </div>
     </div>-->
+  </div>
+</div>
+<div class="modal fade" id="preview_modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-name" id="preview_modal_name"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <center>
+          <embed src="" id="preview_modal_iframe" width="100%" height="400px"></embed>
+        </center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 @endsection

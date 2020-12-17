@@ -6,11 +6,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use App\Topic;
 use App\Assignment;
 use App\Comment;
 
 class AssignmentController extends Controller
 {
+    public function index(Request $request){
+        if($request->session()->get('type') != 'Administrator'){
+            return redirect('user/login');
+        }
+        $data['request'] = $request;
+        $data['title'] = 'Assignment';
+
+        $data['assignment'] = Assignment::groupBy('topic_id', 'user_id')->get();
+        return view('assignment/index', $data);
+    }
+    public function lock(Request $request, $id, $lock, $div_id){
+        if($request->session()->get('type') != 'Administrator'){
+            return redirect('user/login');
+        }
+        $assignment = Assignment::find($id);
+        $assignment->update(['locked' => $lock]);
+        return redirect('program/detail/assignment/'.$assignment->topic->id.'/'.$assignment->user->id.'#'.$div_id);
+    }
     public function add_post(Request $request){
         if($request->session()->get('type') != 'User' || $request->user_id != $request->session()->get('id')){
             return redirect('user/login');
@@ -27,8 +46,9 @@ class AssignmentController extends Controller
         $i = 0;
         if($request->hasFile('data_files')){
             foreach ($files as $file) {
-                $files_name[$i] = $request->id."_".$i.".".$file->getClientOriginalExtension();
+                $files_name[$i] = $request->session()->get('id')." - ".$file->getClientOriginalName();
                 //$files_name[$i] = $file->getClientOriginalName();
+                $file->move($folder, $files_name[$i]);
                 $i++;
             }
             unset($data);

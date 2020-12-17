@@ -44,6 +44,7 @@ class TopicController extends Controller
                 //$files_name[$i] = $request->id."_".$i.".".$file->getClientOriginalExtension();
                 $files_name[$i] = $file->getClientOriginalName();
                 $i++;
+                $file->move($folder, $files_name[$i]);
             }
             unset($data);
             $data['files'] = implode(',', $files_name);
@@ -70,6 +71,7 @@ class TopicController extends Controller
             foreach ($files as $file) {
                 //$files_name[$i] = $request->id."_".$i.".".$file->getClientOriginalExtension();
                 $files_name[$i] = $file->getClientOriginalName();
+                $file->move($folder, $files_name[$i]);
                 $i++;
             }
             $data['files'] = implode(',', $files_name);

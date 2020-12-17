@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use App\Assignment;
 use App\User;
 
 class UserController extends Controller
@@ -58,7 +59,9 @@ class UserController extends Controller
         $data['request'] = $request;
         $data['title'] = 'Profile';
 
-        $data['user'] = User::find($request->id);
+        $data['user'] = User::find($id);
+        $data['assignment'] = Assignment::where(['user_id' => $id])->groupBy('topic_id')->get();
+
         return view('user/profile', $data);
     }
     public function profile_post(Request $request){

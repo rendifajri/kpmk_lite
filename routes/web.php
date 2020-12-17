@@ -33,8 +33,12 @@ Route::get ('backend/user/reset_password/{id}', 'UserController@reset_password')
 Route::get ('program', 'ProgramController@f_index');
 Route::get ('program/detail/{id}', 'ProgramController@f_detail');
 Route::get ('program/detail/assignment/{topic_id}/{user_id}', 'ProgramController@assignment');
+
+Route::get ('backend/assignment', 'AssignmentController@index');
+Route::get ('backend/assignment/lock/{id}/{lock}/{div_id}', 'AssignmentController@lock');
 Route::post('assignment/add/post', 'AssignmentController@add_post');
 Route::post('assignment/comment/add/post', 'AssignmentController@comment_add_post');
+
 Route::get ('backend/program', 'ProgramController@index');
 Route::post('backend/program/add/post', 'ProgramController@add_post');
 Route::put ('backend/program/edit/post', 'ProgramController@edit_post');

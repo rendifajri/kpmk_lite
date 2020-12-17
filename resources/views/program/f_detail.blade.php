@@ -23,6 +23,15 @@
   height: 200px
 }
 </style>
+<script>
+function show_preview(folder, file, width){
+  $('#preview_modal_name').html(file);
+  $('#preview_modal_iframe').attr("src", '{{ asset('/') }}files/'+folder+'/'+file);
+  $('#preview_modal_iframe').attr("width", width);
+  $('#preview_modal').modal({ show: false });
+  $('#preview_modal').modal('show');
+}
+</script>
 <div class="col-12">
   <div class="card">
     <!--<h5 class="card-title p-3" style="padding-bottom: 0px!important;">{{$program->name}}</h5>-->
@@ -35,6 +44,20 @@
               <div class="float-left mr-3 rounded" style="background: url('{{ asset('/') }}images/program/{{$program->image}}')center center/cover;width: 300px;height: 200px;border: 3px solid #AAA"></div>
             @endif
             <?=$program->description?>
+            Files :
+            <?php
+            $files = explode(',', $program->files);
+            natcasesort($files);
+            foreach($files as $file){
+              $ext = pathinfo($file)['extension'];
+              if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+                echo ' <a href="javascript:show_preview(\'program\', \''.$file.'\', null)">'.$file.'</a>';
+              else if($ext == 'pdf')
+                echo ' <a href="javascript:show_preview(\'program\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+              else
+                echo ' <a href="'.asset('/').'files/program/'.$file.'".>'.$file.'</a>';
+            }
+            ?>
           </p>
         </div>
       </div>
@@ -46,8 +69,7 @@
               <tr>
                 <th>Date</th>
                 <th>Name</th>
-                <th>Files</th>
-                <th>Description</th>
+                <th>Assignment</th>
                 <th style="width:50px">Assign</th>
               </tr>
             </thead>
@@ -56,14 +78,33 @@
               <tr>
                 <td>{{date('j M Y', strtotime($row->created_at))}}</td>
                 <td>{{$row->name}}</td>
-                <td>{{$row->files}}</td>
-                <td><?=$row->description?></td>
+                <td>{{$row->assignment()->where(['user_id' => Session::get('id')])->count()}}</td>
                 <td><a href="{{ url('/') }}/program/detail/assignment/{{$row->id}}/{{$request->session()->get('id')}}" class="btn btn-sm btn-primary">Assign</a></td>
               </tr>
               @endforeach
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="preview_modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-name" id="preview_modal_name"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <center>
+          <embed src="" id="preview_modal_iframe" width="100%" height="400px"></embed>
+        </center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

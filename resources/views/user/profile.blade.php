@@ -146,9 +146,33 @@ function cekform(mode){
               </form>
             </div>
           </div>
-          <div class="active tab-pane" id="assignment">
+          <div class="tab-pane" id="assignment">
             <div class="col-12">
-              <!-- kosong -->
+              <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Program</th>
+                      <th>Topic</th>
+                      <th style="width:20px"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($assignment as $row)
+                      <tr>
+                          <td>{{ $row->topic->program->name }}</td>
+                          <td>{{ $row->topic->name }}</td>
+                          <td class="text-right">
+                            <a href="{{ url('/') }}/program/detail/assignment/{{$row->topic->id}}/{{$row->user->id}}" class="btn bg-green btn-circle btn-xs" title="See Assignment"><i class="fa fa-paper-plane"></i></a>
+                          </td>
+                      </tr>
+                    @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>

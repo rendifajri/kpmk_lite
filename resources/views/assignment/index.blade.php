@@ -15,19 +15,36 @@
 <link rel="stylesheet" href="{{ asset('/') }}vendor/almasaeed2010/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 @endsection
 @section('content')
-<div class="row">
-  @foreach($user as $row)
-  <div class="col-3">
-    <a href="{{ url('/') }}/user/profile/{{ $row->id }}" class="card" style="height:180px">
-      <div class="card-body box-profile bg-info">
-        <div class="text-center">
-          <div class="profile-user-img img-fluid img-circle" style="background: url('{{ asset('/') }}images/user/{{$row->image == null ? 'no_image.jpg' : $row->image}}')center center/cover;height: 100px;width: 100px"></div>
-          {{$row->name}}
-        </div>
-      </div>
-    </a>
+<div class="col-12">
+  <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Program</th>
+          <th>Topic</th>
+          <th>Username</th>
+          <th>User Name</th>
+          <th style="width:20px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($assignment as $row)
+          <tr>
+              <td>{{ $row->topic->program->name }}</td>
+              <td>{{ $row->topic->name }}</td>
+              <td>{{ $row->user->username }}</td>
+              <td>{{ $row->user->name }}</td>
+              <td class="text-right">
+                <a href="{{ url('/') }}/program/detail/assignment/{{$row->topic->id}}/{{$row->user->id}}" class="btn bg-green btn-circle btn-xs" title="See Assignment"><i class="fa fa-paper-plane"></i></a>
+              </td>
+          </tr>
+        @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
-  @endforeach
 </div>
 @endsection
 @section('content_js')
