@@ -75,6 +75,20 @@
 <!-- /.row -->
 <!-- Main row -->
 <div class="row">
+  <section class="col-lg-12 connectedSortable">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fa fa-camera-retro mr-1"></i>
+          Our Gallery
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="row" id="instagram-feed1">
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Left col -->
   <section class="col-lg-7 connectedSortable">
     <!-- Custom tabs (Charts with tabs)-->
@@ -182,4 +196,76 @@
 <script src="{{ asset('/') }}vendor/almasaeed2010/adminlte/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/') }}vendor/almasaeed2010/adminlte/dist/js/demo.js"></script>
+
+<script async src="//platform.instagram.com/en_US/embeds.js"></script>
+<script src="{{ asset('/') }}third_party/jquery.instagramFeed-master/jquery.instagramFeed.min.js"></script>
+<script>
+    (function($){
+        $(window).on('load', function(){
+            $.instagramFeed({
+                'username': '_kpmk_',
+                'callback': function(data){insta_loop(data)}
+                /*'callback': function(data){console.log(data)},
+                'container': "#instagram-feed1",
+                'display_profile': true,
+                'display_biography': true,
+                'display_gallery': true,
+                'display_captions': true,
+                'styling': true,
+                'items': 8,
+                'items_per_row': 4,
+                'margin': 1,
+                'lazy_load': true,
+                'on_error': console.error,
+                'on_succes': console.log(data)*/
+            });
+        });
+    })(jQuery);
+function insta_loop(data){
+  //console.log(data.edge_owner_to_timeline_media.edges);
+  var arr_feed = data.edge_owner_to_timeline_media.edges;
+  for(var i=0;i<arr_feed.length;i++){
+    console.log(arr_feed[i].node);
+    $('#instagram-feed1').append('<div class="col-lg-3 col-6">'+
+                    '<iframe src="https://www.instagram.com/p/'+arr_feed[i].node.shortcode+'/embed" class="border rounded" height="450" width="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'+
+                  '</div>');
+  }
+  /*setTimeout(function() {
+      var head_ID = document.getElementsByTagName("head")[0]; 
+      var script_element = document.createElement('script');
+      script_element.type = 'text/javascript';
+      script_element.src = '//platform.instagram.com/en_US/embeds.js';
+      head_ID.appendChild(script_element);
+      console.log('//platform.instagram.com/en_US/embeds.js');
+    }, 3000);*/
+}
+function insta_loop1(data){
+  //console.log(data.edge_owner_to_timeline_media.edges);
+  var arr_feed = data.edge_owner_to_timeline_media.edges;
+  for(var i=0;i<arr_feed.length;i++){
+    let calc_height = (arr_feed[i].node.dimensions.height*100)/arr_feed[i].node.dimensions.width;
+    let modif_height = Math.floor(calc_height*0.18);
+    console.log(modif_height);
+    console.log(arr_feed[i]);
+    //console.log($('#instagram-feed1')[0].clientWidth);
+    $('#instagram-feed1').append('<div class="col-lg-3 col-6">'+
+                    '<iframe src="https://www.instagram.com/p/'+arr_feed[i].node.shortcode+'/embed" style="margin-bottom:calc('+modif_height+'vw - 230px);height:calc('+modif_height+'vw + 210px);"  width="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'+
+                  '</div>');
+  }
+}
+function insta_loop2(data){
+  //console.log(data.edge_owner_to_timeline_media.edges);
+  var arr_feed = data.edge_owner_to_timeline_media.edges;
+  for(var i=0;i<arr_feed.length;i++){
+    let calc_height = (arr_feed[i].node.dimensions.height*100)/arr_feed[i].node.dimensions.width;
+    let modif_height = Math.floor(calc_height*0.39);
+    console.log(modif_height);
+    console.log(arr_feed[i]);
+    //console.log($('#instagram-feed1')[0].clientWidth);
+    $('#instagram-feed1').append('<div class="col-lg-3 col-6">'+
+                    '<iframe src="https://www.instagram.com/p/'+arr_feed[i].node.shortcode+'/embed" style="margin-bottom:calc('+modif_height+'% + 250px);height:calc('+modif_height+'% + 200px);"  width="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'+
+                  '</div>');
+  }
+}
+</script>
 @endsection

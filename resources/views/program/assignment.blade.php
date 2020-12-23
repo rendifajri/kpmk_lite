@@ -33,9 +33,9 @@
 </style>
 <script type="text/javascript">
 function cekform(mode){
-  if($('#'+mode+'_'+'add_files').val()==""){
+  if(document.getElementById(mode+'_'+'files').files.length==0){
     alert('Files is empty.');
-    $('#'+mode+'_'+'add_files').focus();
+    $('.'+mode+'_'+'files').focus();
     return false;
   }
   else if($('#'+mode+'_'+'comment').val()==""){
@@ -44,7 +44,7 @@ function cekform(mode){
     return false;
   }
   else {
-    $('#'+mode+'_frm').submit();
+    //$('#'+mode+'_frm').submit();
   }
 }
 function cekuserform(mode, div_id){
@@ -145,16 +145,18 @@ function show_preview(folder, file, width){
                 <div class="col-lg-11 col-md-10 col-sm-10 col-9 pt-2">
                   @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
                   <?php
-                  $files = explode(',', $row->files);
-                  natcasesort($files);
-                  foreach($files as $file){
-                    $ext = pathinfo($file)['extension'];
-                    if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
-                      echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', null)">'.$file.'</a>';
-                    else if($ext == 'pdf')
-                      echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', \'100%\')">'.$file.'</a>';
-                    else
-                      echo ' <a href="'.asset('/').'files/assignment/'.$file.'".>'.$file.'</a>';
+                  if($row->files != null){
+                    $files = explode(',', $row->files);
+                    natcasesort($files);
+                    foreach($files as $file){
+                      $ext = pathinfo($file)['extension'];
+                      if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+                        echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', null)">'.$file.'</a>';
+                      else if($ext == 'pdf')
+                        echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+                      else
+                        echo ' <a href="'.asset('/').'files/assignment/'.$file.'".>'.$file.'</a>';
+                    }
                   }
                   ?>
                   @else

@@ -101,7 +101,7 @@ function show_modal(mode, data_arr) {
         <strong>{{ Session::get('message') }}</strong>
       </div>
       @endif
-      <table id="example1" class="table table-bordered table-striped">
+      <table id="example1" class="table table-bordered table-striped table-hover table-sm">
         <thead>
         <tr>
           <th>ID</th>
