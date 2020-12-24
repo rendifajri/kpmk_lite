@@ -64,10 +64,7 @@ function cekform(mode){
             <b>Username</b> <a class="float-right">{{$user->username}}</a>
           </li>
           <li class="list-group-item">
-            <b>Email</b> <a class="float-right">{{$user->email}}</a>
-          </li>
-          <li class="list-group-item">
-            <b>Phone</b> <a class="float-right">{{$user->phone}}</a>
+            <b>Avg Grade</b> <a class="float-right">{{$assignment->avg('grade')}}</a>
           </li>
         </ul>
       </div>
@@ -92,7 +89,7 @@ function cekform(mode){
               <strong>{{ Session::get('message') }}</strong>
             </div>
             @endif
-            <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+            <div class="col-lg-8 col-md-10 col-sm-12">
               <form class="form-horizontal" name="add_frm" id="add_frm" method="post" enctype="multipart/form-data" name="frm" action="{{ url('/') }}/user/profile/post">
               <input type="hidden" name="id" id="add_id" value="{{ $user->id }}">
               {{ csrf_field() }}
@@ -156,6 +153,7 @@ function cekform(mode){
                     <tr>
                       <th>Program</th>
                       <th>Topic</th>
+                      <th>Grade</th>
                       <th style="width:20px"></th>
                     </tr>
                     </thead>
@@ -164,6 +162,7 @@ function cekform(mode){
                       <tr>
                           <td>{{ $row->topic->program->name }}</td>
                           <td>{{ $row->topic->name }}</td>
+                          <td>{{ $row->grade }}</td>
                           <td class="text-right">
                             <a href="{{ url('/') }}/program/detail/assignment/{{$row->topic->id}}/{{$row->user->id}}" class="btn bg-green btn-circle btn-xs" title="See Assignment"><i class="fa fa-paper-plane"></i></a>
                           </td>

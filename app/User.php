@@ -12,4 +12,7 @@ class User extends Model
     public function transaction(){
     	return $this->hasMany('App\Transaction');
     }
+    public function assignment(){
+    	return $this->hasMany('App\assignment');
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use App\Assignment;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -60,7 +61,7 @@ class UserController extends Controller
         $data['title'] = 'Profile';
 
         $data['user'] = User::find($id);
-        $data['assignment'] = Assignment::where(['user_id' => $id])->groupBy('topic_id')->get();
+        $data['assignment'] = $data['user']->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'));
 
         return view('user/profile', $data);
     }

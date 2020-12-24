@@ -19,7 +19,19 @@
   @foreach($user as $row)
   <div class="col-md-3 col-sm-4 col-6">
     <a href="{{ url('/') }}/user/profile/{{ $row->id }}" class="card" style="height:180px">
-      <div class="card-body box-profile bg-info">
+      <div class="card-body box-profile <?php
+      $grade = $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->avg('grade');
+      if($grade <= 100 && $grade > 90)
+        echo "bg-green";
+      if($grade <= 80 && $grade > 60)
+        echo "bg-lime";
+      if($grade <= 60 && $grade > 40)
+        echo "bg-yellow";
+      if($grade <= 40 && $grade > 20)
+        echo "bg-orange";
+      if($grade <= 20)
+        echo "bg-red";
+      ?>">
         <div class="text-center">
           <div class="profile-user-img img-fluid img-circle" style="background: url('{{ asset('/') }}images/user/{{$row->image == null ? 'no_image.jpg' : $row->image}}')center center/cover;height: 100px;width: 100px"></div>
           {{$row->name}}

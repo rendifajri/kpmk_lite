@@ -44,7 +44,7 @@ function cekform(mode){
     return false;
   }
   else {
-    //$('#'+mode+'_frm').submit();
+    $('#'+mode+'_frm').submit();
   }
 }
 function cekuserform(mode, div_id){
@@ -163,6 +163,18 @@ function show_preview(folder, file, width){
                   Hidden
                   @endif
                 </div>
+              </div>
+              <div class="form-group row mt-n2">
+                <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Grade</label>
+                @if($request->session()->get('type') == 'Administrator')
+                <div class="col-3">
+                  <input type="text" class="form-control" name="grade" id="add_<?=$id_link?>_grade" placeholder="Grade" value="{{$row->grade}}">
+                </div>
+                @else
+                <div class="col-3 pt-2">
+                  {{$row->grade}}
+                </div>
+                @endif
               </div>
               @foreach($row->comment as $row_comment)
               <?php

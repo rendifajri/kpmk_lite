@@ -132,6 +132,7 @@ function show_modal(mode, data_arr) {
           <th>Name</th>
           <th>Temp Pass</th>
           <th>Phone</th>
+          <th>Grade</th>
           <th>Status</th>
           <th style="width:90px"></th>
         </tr>
@@ -150,6 +151,7 @@ function show_modal(mode, data_arr) {
               <td>{{ $row->username }}</td>
               <td>{{ $row->name }}</td>
               <td>{{ $row->temp_password }}</td>
+              <td>{{ $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->avg('grade') }}</td>
               <td>{{ $row->phone }}</td>
               <td>{{ $active }}</td>
               <td class="text-right">

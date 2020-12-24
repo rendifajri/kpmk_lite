@@ -26,6 +26,7 @@
           <th>Topic</th>
           <th>Username</th>
           <th>User Name</th>
+          <th>Grade</th>
           <th style="width:20px"></th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
               <td>{{ $row->topic->name }}</td>
               <td>{{ $row->user->username }}</td>
               <td>{{ $row->user->name }}</td>
+              <td>{{ $row->grade }}</td>
               <td class="text-right">
                 <a href="{{ url('/') }}/program/detail/assignment/{{$row->topic->id}}/{{$row->user->id}}" class="btn bg-green btn-circle btn-xs" title="See Assignment"><i class="fa fa-paper-plane"></i></a>
               </td>

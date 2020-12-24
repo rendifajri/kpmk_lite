@@ -9,6 +9,7 @@ use Session;
 use App\Topic;
 use App\Assignment;
 use App\Comment;
+use Illuminate\Support\Facades\DB;
 
 class AssignmentController extends Controller
 {
@@ -19,7 +20,7 @@ class AssignmentController extends Controller
         $data['request'] = $request;
         $data['title'] = 'Assignment';
 
-        $data['assignment'] = Assignment::groupBy('topic_id', 'user_id')->get();
+        $data['assignment'] = Assignment::groupBy('topic_id', 'user_id')->get(DB::raw('*, MAX(grade) as grade'));
         return view('assignment/index', $data);
     }
     public function lock(Request $request, $id, $lock, $div_id){
@@ -68,13 +69,19 @@ class AssignmentController extends Controller
         if($request->session()->get('type') != 'Administrator' && $request->user_id != $request->session()->get('id')){
             return redirect('user/login');
         }
-        $data = [
-                    'user_id' => $request->session()->get('id'),
-                    'assignment_id' => $request->assignment_id,
-                    'comment' => $request->comment,
-                    'read_status' => 0
-                ];
-        Comment::create($data);
+        if($request->session()->get('type') == 'Administrator' && $request->grade != ''){
+            $data['grade'] = $request->grade;
+            Assignment::find($request->assignment_id)->update($data);
+        }
+        if($request->comment != '<p>.</p>'){
+            $data = [
+                        'user_id' => $request->session()->get('id'),
+                        'assignment_id' => $request->assignment_id,
+                        'comment' => $request->comment,
+                        'read_status' => 0
+                    ];
+            Comment::create($data);
+        }
         return redirect('program/detail/assignment/'.$request->topic_id.'/'.$request->user_id.'#'.$request->div_id);
     }
 }
