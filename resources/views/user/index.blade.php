@@ -151,8 +151,8 @@ function show_modal(mode, data_arr) {
               <td>{{ $row->username }}</td>
               <td>{{ $row->name }}</td>
               <td>{{ $row->temp_password }}</td>
-              <td>{{ $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->avg('grade') }}</td>
               <td>{{ $row->phone }}</td>
+              <td>{{ $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->avg('grade') }}</td>
               <td>{{ $active }}</td>
               <td class="text-right">
                 <a href="{{ url('/') }}/backend/user/reset_password/{{ $row->id }}" target="_blank" class="btn bg-green btn-circle btn-xs" title="Reset Password" onclick="return confirm('Are you sure want to RESET {{ $row->name }} password?')"><i class="fa fa-lock"></i></a>
