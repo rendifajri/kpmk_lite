@@ -13,6 +13,6 @@ class User extends Model
     	return $this->hasMany('App\Transaction');
     }
     public function assignment(){
-    	return $this->hasMany('App\assignment');
+    	return $this->hasMany('App\Assignment');
     }
 }
