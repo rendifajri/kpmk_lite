@@ -51,11 +51,11 @@ function show_preview(folder, file, width){
             foreach($files as $file){
               $ext = pathinfo($file)['extension'];
               if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
-                echo ' <a href="javascript:show_preview(\'program\', \''.$file.'\', null)">'.$file.'</a>';
+                echo '<br/><a href="javascript:show_preview(\'program\', \''.$file.'\', null)">'.$file.'</a>';
               else if($ext == 'pdf')
-                echo ' <a href="javascript:show_preview(\'program\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+                echo '<br/><a href="javascript:show_preview(\'program\', \''.$file.'\', \'100%\')">'.$file.'</a>';
               else
-                echo ' <a href="'.asset('/').'files/program/'.$file.'".>'.$file.'</a>';
+                echo '<br/><a href="'.asset('/').'files/program/'.$file.'".>'.$file.'</a>';
             }
             ?>
           </p>
