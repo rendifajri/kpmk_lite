@@ -77,8 +77,14 @@ function show_preview(folder, file, width){
               <div class="float-left mr-3 rounded" style="background: url('{{ asset('/') }}images/program/{{$topic->image}}')center center/cover;width: 300px;height: 200px;border: 3px solid #AAA"></div>
             endif-->
             <?=$topic->description?>
-            Files :
-            <?php
+          </p>
+        </div>
+      </div>
+      <div class="row mt-n3">
+        <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Files</label>
+        <div class="col-lg-11 col-md-10 col-sm-10 col-9 mt-2 py-2 card card-body">
+          <?php
+          if($topic->files != null){
             $files = explode(',', $topic->files);
             natcasesort($files);
             foreach($files as $file){
@@ -90,8 +96,8 @@ function show_preview(folder, file, width){
               else
                 echo ' <a href="'.asset('/').'files/topic/'.$file.'".>'.$file.'</a>';
             }
-            ?>
-          </p>
+          }
+          ?>
         </div>
       </div>
       <div class="row mt-2">
@@ -142,7 +148,7 @@ function show_preview(folder, file, width){
             <div class="form-horizontal px-3">
               <div class="form-group row">
                 <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Files</label>
-                <div class="col-lg-11 col-md-10 col-sm-10 col-9 pt-2">
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9 mt-2 py-2 card card-body">
                   @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
                   <?php
                   if($row->files != null){
