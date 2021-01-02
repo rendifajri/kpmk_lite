@@ -121,13 +121,13 @@ function show_modal(mode, data_arr) {
           $active = "Active";
         else
           $active = "Inactive";
-        $percent = round($row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->count() * 100 / $user->count(), 2);
+        $percent = round($row->assignment()->groupBy('topic_id', 'user_id')->get(DB::raw('*, MAX(grade) as grade'))->count() * 100 / $user->count(), 2);
         ?>
           <tr>
               <td>{{ $row->id }}</td>
               <td>{{ $row->program ? $row->program->name : '' }}</td>
               <td>{{ $row->name }}</td>
-              <td>{{ $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->count().'/'.$user->count() }}</td>
+              <td>{{ $row->assignment()->groupBy('topic_id', 'user_id')->get(DB::raw('*, MAX(grade) as grade'))->count().'/'.$user->count() }}</td>
               <td>{{ $percent }}%</td>
               <td>{{ $active }}</td>
               <td>
