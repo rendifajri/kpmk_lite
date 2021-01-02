@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use App\Program;
 use App\Topic;
+use App\User;
 
 class TopicController extends Controller
 {
@@ -20,6 +21,7 @@ class TopicController extends Controller
 
         $data['program'] = Program::orderBy('name')->get();
         $data['topic'] = Topic::orderBy('name')->get();
+        $data['user'] = User::orderBy('name')->where(['type' => 'User'])->get();
         return view('topic/index', $data);
     }
     public function add_post(Request $request){

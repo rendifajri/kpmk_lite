@@ -107,6 +107,8 @@ function show_modal(mode, data_arr) {
           <th>ID</th>
           <th>Program</th>
           <th>Name</th>
+          <th>Submitted</th>
+          <th>Submitted(%)</th>
           <th>Status</th>
           <th style="width:80px"></th>
         </tr>
@@ -119,11 +121,14 @@ function show_modal(mode, data_arr) {
           $active = "Active";
         else
           $active = "Inactive";
+        $percent = round($row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->count() * 100 / $user->count(), 2);
         ?>
           <tr>
               <td>{{ $row->id }}</td>
               <td>{{ $row->program ? $row->program->name : '' }}</td>
               <td>{{ $row->name }}</td>
+              <td>{{ $row->assignment()->groupBy('topic_id')->get(DB::raw('*, MAX(grade) as grade'))->count().'/'.$user->count() }}</td>
+              <td>{{ $percent }}%</td>
               <td>{{ $active }}</td>
               <td>
                 <button onclick="show_modal('view', {<?php

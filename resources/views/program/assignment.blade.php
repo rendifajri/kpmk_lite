@@ -148,26 +148,28 @@ function show_preview(folder, file, width){
             <div class="form-horizontal px-3">
               <div class="form-group row">
                 <label class="col-lg-1 col-md-2 col-sm-2 col-3 col-form-label">Files</label>
-                <div class="col-lg-11 col-md-10 col-sm-10 col-9 mt-2 py-2 card card-body">
-                  @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
-                  <?php
-                  if($row->files != null){
-                    $files = explode(',', $row->files);
-                    natcasesort($files);
-                    foreach($files as $file){
-                      $ext = pathinfo($file)['extension'];
-                      if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
-                        echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', null)">'.$file.'</a>';
-                      else if($ext == 'pdf')
-                        echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', \'100%\')">'.$file.'</a>';
-                      else
-                        echo ' <a href="'.asset('/').'files/assignment/'.$file.'".>'.$file.'</a>';
+                <div class="col-lg-11 col-md-10 col-sm-10 col-9 mt-2 py-2">
+                  <div class="card card-body">
+                    @if($request->session()->get('type') == 'Administrator' || $row->user->id == $request->session()->get('id') || $row->locked == 1)
+                    <?php
+                    if($row->files != null){
+                      $files = explode(',', $row->files);
+                      natcasesort($files);
+                      foreach($files as $file){
+                        $ext = pathinfo($file)['extension'];
+                        if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+                          echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', null)">'.$file.'</a>';
+                        else if($ext == 'pdf')
+                          echo ' <a href="javascript:show_preview(\'assignment\', \''.$file.'\', \'100%\')">'.$file.'</a>';
+                        else
+                          echo ' <a href="'.asset('/').'files/assignment/'.$file.'".>'.$file.'</a>';
+                      }
                     }
-                  }
-                  ?>
-                  @else
-                  Hidden
-                  @endif
+                    ?>
+                    @else
+                    Hidden
+                    @endif
+                  </div>
                 </div>
               </div>
               <div class="form-group row mt-n2">
