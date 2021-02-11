@@ -248,7 +248,7 @@ function insta_loop1(data){
     console.log(modif_height);
     console.log(arr_feed[i]);
     //console.log($('#instagram-feed1')[0].clientWidth);
-    $('#instagram-feed1').append('<div class="col-lg-3 col-6">'+
+    $('#instagram-feed1').append('<div class="col-md-3 col-lg-6 col-12">'+
                     '<iframe src="https://www.instagram.com/p/'+arr_feed[i].node.shortcode+'/embed" style="margin-bottom:calc('+modif_height+'vw - 230px);height:calc('+modif_height+'vw + 210px);"  width="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'+
                   '</div>');
   }

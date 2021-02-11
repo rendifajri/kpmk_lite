@@ -10,10 +10,13 @@ To do
 - DONE Frontend Assignment
 - DONE Coment
 - DONE Frontend User
--      Assignment -> Topic yang udah pny assignment, per user
--      Lock
--      Profile timeline -> Topic yang udah pny assignment
+- DONE Assignment -> Topic yang udah pny assignment, per user
+- DONE Profile timeline -> Topic yang udah pny assignment
+- DONE File preview
+- DONE Lock
+- DONE add/show grade
 -      Notif
+-      Update assignment file
 
 <iframe src="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf" width="100%" height="500px">
 <embed src="file_name.pdf" width="800px" height="2100px" />
@@ -24,6 +27,12 @@ cd vendor
 bower install bootstrap-toggle
 ln -s C:/laragon/www/fl/kpmk_lite/vendor/bower_components C:/laragon/www/fl/kpmk_lite/public/vendor/bower_components
 
+cd vendor
+bower install bootstrap-toggle
+ln -s /home/rendifa1/public_html/kpmk_lite/vendor/bower_components /home/rendifa1/public_html/kpmk_lite/public/vendor/bower_components
+ln -s /home/rendifa1/public_html/kpmk_lite/vendor/almasaeed2010 /home/rendifa1/public_html/kpmk_lite/public/vendor/almasaeed2010
+
+----- Tutorial Laravel 7.30.0 -----
 Pendahuluan
 - untuk instalasi, pada terminal ketik
   composer create-project --prefer-dist laravel/laravel nama_folder_project
